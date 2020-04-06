@@ -8,7 +8,9 @@ class AnswerTile extends Component {
         }
     }
 
-    handleClick = (event) => {
+    handleClick = () => {
+        const { answer, clicked } = this.props;
+        clicked(answer['correct_answer']);
         this.setState({ clicked: true })
     };
 

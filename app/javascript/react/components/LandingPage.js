@@ -30,18 +30,33 @@ class LandingPage extends Component {
             .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
 
+    handlePoints = (points) => {
+        const { totalPoints } = this.state;
+        let newTotal = totalPoints + points;
+        this.setState({ totalPoints: newTotal })
+    };
+
+    renderScore = () => {
+        const { totalPoints } = this.state;
+
+        if (totalPoints !== 0) return <div className="total-score">{`Points: ${totalPoints}`}</div>
+    };
+
     renderQuiz = () => {
+        const { handlePoints, renderScore } = this;
         const { quiz, questions } = this.state;
+
         if (!quiz) return <p>Loading...</p>;
         else {
             let count = 0;
             let renderQuestions = questions.map(question => {
                 count ++;
-                return <QuestionTile key={count} question={question} />
+                return <QuestionTile key={count} question={question} feedPoints={handlePoints}/>
             });
             return (
                 <div>
                     <h3>{quiz.name}</h3>
+                    {renderScore()}
                     {renderQuestions}
                 </div>
             )
