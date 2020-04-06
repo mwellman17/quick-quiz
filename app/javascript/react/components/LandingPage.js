@@ -36,10 +36,10 @@ class LandingPage extends Component {
         this.setState({ totalPoints: newTotal })
     };
 
-    renderScore = () => {
+    renderScore = (position) => {
         const { totalPoints } = this.state;
 
-        if (totalPoints !== 0) return <div className="total-score">{`Points: ${totalPoints}`}</div>
+        if (totalPoints !== 0) return <div className={`total-score ${position}`}>{`Total Score: ${totalPoints}`}</div>
     };
 
     renderQuiz = () => {
@@ -56,8 +56,9 @@ class LandingPage extends Component {
             return (
                 <div>
                     <h3>{quiz.name}</h3>
-                    {renderScore()}
+                    {renderScore('top')}
                     {renderQuestions}
+                    {renderScore('bottom')}
                 </div>
             )
         }

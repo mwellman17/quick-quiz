@@ -1,14 +1,20 @@
 #main-content {
-  margin-bottom: 3rem;
+  padding-bottom: 5rem;
+  position: relative;
   h3 {
     text-align: center;
     padding-top: 3rem;
   }
   .total-score {
     position: absolute;
-    top: 5rem;
-    right: 10%;
     font-size: 20pt;
+    right: 10%;
+    &.top {
+      top: 5rem;
+    }
+    &.bottom {
+      bottom: 1rem;
+    }
   }
   .question {
     position: relative;
@@ -19,7 +25,7 @@
     width: 80%;
     margin: 2rem auto 0 auto;
     h5 {
-      width: 80%;
+      width: 100%;
       .standout {
         font-weight: bold;
       }
@@ -27,13 +33,13 @@
     img {
       cursor: zoom-in;
       position: absolute;
-      right: 2rem;
+      right: 15%;
       width: 400px;
     }
     .score {
       position: absolute;
       right: 5%;
-      top: 1rem;
+      bottom: 1rem;
       font-weight: bold;
       color: black;
       background-color: #B1CA61;
@@ -55,25 +61,34 @@
       background-color: white;
       &.correct {
         background-color: #B1CA61;
+        &:after {
+          content: "✓";
+          padding-left: 1rem;
+        }
       }
       &.incorrect {
         background-color: #E4A757;
+        &:after {
+          content: "X";
+          padding-left: 1rem;
+        }
       }
     }
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1125px) {
   #main-content {
     .question {
       img {
         position: relative;
         padding: 2rem;
+        right: 0;
       }
     }
     .answers {
       .answer {
-        width: 60%;
+        width: 75%;
       }
     }
   }
@@ -81,8 +96,13 @@
 
 @media (max-width: 640px) {
   #main-content {
+    h3 {
+      padding-bottom: 2rem;
+    }
     .total-score {
-      top: 4.5rem;
+      &.top {
+        top: 6rem;
+      }
     }
   }
 }
