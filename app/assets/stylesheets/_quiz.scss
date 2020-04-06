@@ -32,7 +32,7 @@
     }
     .score {
       position: absolute;
-      right: 10%;
+      right: 5%;
       top: 1rem;
       font-weight: bold;
       color: black;
@@ -70,6 +70,19 @@
         position: relative;
         padding: 2rem;
       }
+    }
+    .answers {
+      .answer {
+        width: 60%;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  #main-content {
+    .total-score {
+      top: 4.5rem;
     }
   }
 }
