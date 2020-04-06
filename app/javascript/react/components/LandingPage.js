@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import QuestionTile from "./QuestionTile";
 
 class LandingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             quiz: null,
-            questions: null
+            questions: null,
+            totalPoints: 0
         }
     }
     componentDidMount(){
@@ -32,21 +34,11 @@ class LandingPage extends Component {
         const { quiz, questions } = this.state;
         if (!quiz) return <p>Loading...</p>;
         else {
+            let count = 0;
             let renderQuestions = questions.map(question => {
-                let renderAnswers = question["answers"].map(answer => {
-                    return (
-                        <div>
-                            <p>{answer["letter"] + ") " + answer.text}</p>
-                        </div>
-                    )
-                })
-                return (
-                    <div>
-                        <h5>{question.number + ") " + question.text}</h5>
-                        {renderAnswers}
-                    </div>
-                )
-            })
+                count ++;
+                return <QuestionTile key={count} question={question} />
+            });
             return (
                 <div>
                     <h3>{quiz.name}</h3>
@@ -60,7 +52,7 @@ class LandingPage extends Component {
         const { renderQuiz } = this;
 
         return(
-            <div>
+            <div id="main-content">
                 {renderQuiz()}
             </div>
         )

@@ -1,0 +1,38 @@
+#main-content {
+  padding: 5rem;
+}
+.question {
+  margin-top: 2rem;
+  border: 3px solid blue;
+  border-radius: 10px;
+  padding: 1rem;
+  height: auto;
+  h5 {
+    width: 80%;
+  }
+  img {
+    float: right;
+    width: 400px;
+  }
+}
+.answers {
+  padding-left: 4rem;
+  .answer{
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 20%;
+    padding: 0.5rem;
+    &.correct {
+      background-color: #B1CA61;
+    }
+    &.incorrect {
+      background-color: #E4A757;
+    }
+  }
+}
+h3 {
+  text-align: center;
+}
+.standout {
+  font-weight: bold;
+}
