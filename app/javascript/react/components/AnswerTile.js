@@ -1,31 +1,19 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-class AnswerTile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            clicked: false
-        }
-    }
+export default function AnswerTile (props) {
+    const [clicked, setClicked] = useState(false);
+    const { answer, clickHandler } = props;
 
-    handleClick = () => {
-        const { answer, clicked } = this.props;
-        clicked(answer['correct_answer']);
-        this.setState({ clicked: true })
+    const handleClick = () => {
+        clickHandler(answer['correct_answer']);
+        setClicked(true)
     };
 
-    render() {
-        const { handleClick } = this;
-        const { answer } = this.props;
-        const { clicked } = this.state;
-        let selectedClasses = clicked ? answer['correct_answer'] ? "correct" : "incorrect" : "";
+    let selectedClasses = clicked ? answer['correct_answer'] ? "correct" : "incorrect" : "";
 
-        return (
-            <p className={`answer ${selectedClasses}`} onClick={clicked ? null : handleClick}>
-                {answer["letter"] + ") " + answer.text}
-            </p>
-        )
-    }
+    return (
+        <p className={`answer ${selectedClasses}`} onClick={clicked ? null : handleClick}>
+            {answer["letter"] + ") " + answer.text}
+        </p>
+    )
 }
-
-export default AnswerTile;

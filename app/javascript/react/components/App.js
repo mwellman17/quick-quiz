@@ -1,15 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LandingPage from './LandingPage'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import LandingPage from './LandingPage';
+import QuizContainer from "./QuizContainer";
+import QuizList from "./QuizList";
 
-const App = (props) => {
+export default function App (props) {
   return(
       <BrowserRouter>
           <Switch>
+              <Route path="/quizzes/:id" component={QuizContainer}/>
+              <Route path="/quizzes" component={QuizList}/>
               <Route path="/" component={LandingPage}/>
           </Switch>
       </BrowserRouter>
   )
 };
-
-export default App

@@ -1,4 +1,6 @@
-quiz = Quiz.create!({ name: "IRAT/GRAT – E011 Respiratory Distress 2020" })
+user = User.first
+
+quiz = Quiz.create!({ name: "IRAT/GRAT – E011 Respiratory Distress 2020", user: user })
 
 question_one = Question.create!({
     number: 1,
