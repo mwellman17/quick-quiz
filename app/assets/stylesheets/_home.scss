@@ -1,0 +1,49 @@
+.navigation {
+  .user-section {
+    .right {
+      width: 100%;
+      justify-content: flex-end;
+      margin-left: auto;
+      margin-right: 0;
+      list-style-type: none;
+      display: inline-flex;
+      li {
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+#quiz-list {
+  display: flex;
+  //margin: 0 auto;
+  justify-content: space-around;
+  .quiz-tile {
+    display: inline-flex;
+    padding-bottom: 2rem;
+      .tip {
+        position: relative;
+        span {
+          display: none;
+        }
+        &.tip:hover {
+          text-decoration: none;
+          span {
+            display: block;
+            position: absolute;
+            left: 1rem;
+            text-align: left;
+            width: 300px;
+          }
+        }
+      }
+      .action {
+      cursor: pointer;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      color: darkblue;
+      &:hover{
+        background-color: rgba(lightblue, 0.4);
+      }
+    }
+  }
+}

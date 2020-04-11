@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import QuizTile from "./QuizTile";
 
 export default function QuizList (props) {
     const [quizzes, setQuizzes] = useState(null);
@@ -27,24 +27,19 @@ export default function QuizList (props) {
     const renderQuizzes = () => {
         if (!quizzes) return <p>loading...</p>;
         else {
-            return quizzes.map(quiz => {
-                let linkName = quiz.name.replace(/(\s+|\/+)/g, '');
-
-                return (
-                    <div>
-                        <p key={quiz.id}>{quiz.name}</p>
-                        <Link to={`/quizzes/${quiz.id}=:${linkName}`}>take</Link>
-                    </div>
-
-                )
-            })
+            return quizzes.map(quiz => { return <QuizTile key={quiz.id} quiz={quiz}/> })
         }
-    }
+    };
 
     return(
-        <div>
-            <h1>Quizzes</h1>
-            {renderQuizzes()}
+        <div id="quiz-list">
+            <div>
+                <h3>My Quizzes</h3>
+                {renderQuizzes()}
+            </div>
+            <div>
+                <h3>Create a New Quiz</h3>
+            </div>
         </div>
     )
 }

@@ -16,6 +16,7 @@
     "babel-loader": "^8.0.6",
     "prop-types": "~15.6.0",
     "react": "~16.8.0",
+    "react-alert": "^7.0.0",
     "react-dom": "~16.8.0",
     "react-router-dom": "5.1.2",
     "react-string-replace": "^0.4.4",

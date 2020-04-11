@@ -6,12 +6,14 @@ import QuizList from "./QuizList";
 
 export default function App (props) {
   return(
-      <BrowserRouter>
-          <Switch>
-              <Route path="/quizzes/:id" component={QuizContainer}/>
-              <Route path="/quizzes" component={QuizList}/>
-              <Route path="/" component={LandingPage}/>
-          </Switch>
-      </BrowserRouter>
+      <div>
+          <BrowserRouter>
+              <Switch>
+                  <Route path="/quizzes/:id" component={QuizContainer}/>
+                  <Route exact path="/quizzes" component={QuizList}/>
+                  <Route exact path="/" component={LandingPage}/>
+              </Switch>
+          </BrowserRouter>
+      </div>
   )
 };
