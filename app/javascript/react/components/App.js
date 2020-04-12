@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import QuizContainer from "./QuizContainer";
-import QuizList from "./QuizList";
+import Dashboard from "./Dashboard";
 
 export default function App (props) {
   return(
@@ -10,7 +10,7 @@ export default function App (props) {
           <BrowserRouter>
               <Switch>
                   <Route path="/quizzes/:id" component={QuizContainer}/>
-                  <Route exact path="/quizzes" component={QuizList}/>
+                  <Route exact path="/quizzes" component={Dashboard}/>
                   <Route exact path="/" component={LandingPage}/>
               </Switch>
           </BrowserRouter>

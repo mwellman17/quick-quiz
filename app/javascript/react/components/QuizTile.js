@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 export default function QuizTile (props) {
     const [copied, setCopied] = useState(false);
-    const { quiz } = props;
-    const pathName = quiz.name.replace(/(\s+|\/+)/g, '');
-    const fullPath = `/quizzes/${quiz.id}=:${pathName}`;
+    const { quiz, handleEdit } = props;
+    const pathName = quiz.id + '=:' + quiz.name.replace(/(\s+|\/+)/g, '');
+    const fullPath = `/quizzes/${pathName}`;
 
     const renderCopyLink = () => {
         if (document.queryCommandSupported('copy')) {
@@ -22,7 +21,7 @@ export default function QuizTile (props) {
             if (copied) {
                 return (
                     <span className="tip">
-                        <i className="fas fa-clipboard-check action"/>
+                        <i className="fas fa-clipboard-check action success"/>
                         <span>copied!</span>
                     </span>
                 )
@@ -30,7 +29,7 @@ export default function QuizTile (props) {
             else {
                 return (
                     <span className="tip">
-                        <i onClick={copyToClipboard} className="fas fa-clipboard action"/>
+                        <i onClick={copyToClipboard} className="fas fa-clipboard-list action"/>
                         <span>copy link to clipboard</span>
                     </span>
                 )
@@ -40,12 +39,12 @@ export default function QuizTile (props) {
 
     return (
         <div className="quiz-tile">
-            <a className="action" href={fullPath}>{quiz.name}</a>
             <span className="tip">
-                <Link to={`/edit/:id`}><i className="far fa-edit action"/></Link>
+                <i onClick={() => handleEdit(pathName)} className="far fa-edit action"/>
                 <span>edit</span>
             </span>
             {renderCopyLink()}
+            <a className="action" href={fullPath}>{quiz.name}</a>
         </div>
     )
 }

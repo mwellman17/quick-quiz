@@ -3,6 +3,7 @@ import QuizTile from "./QuizTile";
 
 export default function QuizList (props) {
     const [quizzes, setQuizzes] = useState(null);
+    const { handleEdit, handleCreate } = props;
 
     useEffect(() => {
         fetch(`/api/v1/quizzes`, { credentials: 'same-origin' })
@@ -27,19 +28,17 @@ export default function QuizList (props) {
     const renderQuizzes = () => {
         if (!quizzes) return <p>loading...</p>;
         else {
-            return quizzes.map(quiz => { return <QuizTile key={quiz.id} quiz={quiz}/> })
+            return quizzes.map(quiz => {
+                return <QuizTile key={quiz.id} quiz={quiz} handleEdit={handleEdit}/>
+            })
         }
     };
 
     return(
         <div id="quiz-list">
-            <div>
-                <h3>My Quizzes</h3>
-                {renderQuizzes()}
-            </div>
-            <div>
-                <h3>Create a New Quiz</h3>
-            </div>
+            <button onClick={handleCreate} className="create-button">Create</button>
+            <h3>My Quizzes</h3>
+            {renderQuizzes()}
         </div>
     )
 }
