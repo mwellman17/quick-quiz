@@ -11,7 +11,7 @@ export default function App (props) {
               <Switch>
                   <Route path="/quizzes/:id" component={QuizContainer}/>
                   <Route exact path="/quizzes" component={Dashboard}/>
-                  <Route exact path="/" component={LandingPage}/>
+                  <Route exact path="/" component={Dashboard}/>
               </Switch>
           </BrowserRouter>
       </div>

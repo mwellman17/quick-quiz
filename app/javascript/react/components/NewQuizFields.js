@@ -25,6 +25,15 @@ export default function NewQuizFields (props) {
         setData(newData)
     };
 
+    const handleCheckboxChange = (event) => {
+        let newData = _.cloneDeep(data);
+        let t = event.target.id.split('-');
+        let answers = newData[t[0]][t[1]][t[2]];
+        answers.forEach(answer => { answer['correct_answer'] = false });
+        answers[t[3]][t[4]] = event.target.checked;
+        setData(newData)
+    };
+
     const addQuestion = () => {
         let newData = _.cloneDeep(data);
         let newQuestion = _.cloneDeep(blankQuestion);
@@ -36,7 +45,7 @@ export default function NewQuizFields (props) {
     const addAnswer = (index) => {
         let newData = _.cloneDeep(data);
         let answers = newData.questions[index].answers;
-        let newAnswer = { text: "", letter: letters[answers.length] };
+        let newAnswer = { correct_answer: false, text: "", letter: letters[answers.length] };
         answers.push(newAnswer);
         setData(newData)
     };
@@ -63,9 +72,15 @@ export default function NewQuizFields (props) {
         return data.questions.map((question, qInd) => {
             const answers = question.answers.map((answer, aInd) => {
                 const answerPath = `questions-${qInd}-answers-${aInd}-text`;
+                const correctPath = `questions-${qInd}-answers-${aInd}-correct_answer`;
                 return (
                    <div key={qInd + aInd} className="answer-fields">
-                       <i className="fas fa-trash-alt" onClick={() => removeAnswer(qInd, aInd)}/>
+                       <div className="correct-checkbox">
+                           <label htmlFor={correctPath}>correct answer:</label>
+                           <input type="checkbox" id={correctPath} name={correctPath} value={answer.text}
+                                  checked={answer['correct_answer']} onChange={handleCheckboxChange}/>
+                       </div>
+                       <i className="fas fa-minus-circle" onClick={() => removeAnswer(qInd, aInd)}/>
                        <label htmlFor={answerPath}>{answer.letter + ')'}</label>
                        <textarea id={answerPath} name={answerPath} rows="2"
                               value={answer.text} onChange={handleAnswerChange}/>
@@ -76,12 +91,13 @@ export default function NewQuizFields (props) {
             const questionImgPath = `questions-${qInd}-image_url`;
             return (
                 <div key={qInd} className="question-fields">
-                    <i className="fas fa-trash-alt" onClick={() => removeQuestion(qInd)}/>
+                    <i className="fas fa-minus-circle" onClick={() => removeQuestion(qInd)}/>
                     <label htmlFor={questionTextPath}>{`Question ${question.number}:`}</label>
                     <textarea name={questionTextPath} id={questionTextPath} rows="5"
                               value={question.text} onChange={handleQuestionChange}/>
                     <label htmlFor={questionImgPath}>Image URL</label>
-                    <input type="text" name={questionImgPath} id={questionImgPath} value={question["image_url"]}
+                    <input type="text" name={questionImgPath} id={questionImgPath}
+                           value={question["image_url"] ? question["image_url"] : ""}
                            onChange={handleQuestionChange} placeholder="optional"/>
                     {answers}
                     <button onClick={() => addAnswer(qInd)}>add answer</button>

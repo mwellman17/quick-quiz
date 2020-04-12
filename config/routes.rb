@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-    root 'homes#index'
+    root 'quizzes#index'
     devise_for :users
     resources :quizzes, only: [:index, :show]
 
     namespace :api do
         namespace :v1 do
-            resources :quizzes, only: [:index, :show]
+            resources :quizzes, only: [:index, :show, :update, :create]
         end
     end
 end

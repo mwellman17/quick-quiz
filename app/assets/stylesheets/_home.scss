@@ -47,7 +47,6 @@
       }
     }
     .quiz-tile {
-      display: inline-flex;
       padding-bottom: 2rem;
         .tip {
           position: relative;
@@ -98,13 +97,19 @@
       }
     }
     button {
-      color: black;
-      cursor: pointer;
+      margin-right: 2rem;
+      background-color: lightblue;
+      padding: 0.5rem;
+      width: 150px;
+      border-radius: 10px;
       &:hover {
-        color: blue;
+        cursor: pointer;
+        background-color: darkblue;
+        color: white;
       }
     }
     .question-fields {
+      padding-bottom: 3rem;
       button {
         margin-left: 6rem;
       }
@@ -114,13 +119,32 @@
       width: calc(100% - 6rem);
       position: relative;
       i {
-        right: 0;
+        position: absolute;
+        right: -1rem;
+        top: 3rem;
       }
       label {
         position: absolute;
         left: 4rem;
         top: 1rem;
       }
+      .correct-checkbox {
+        position: relative;
+        height: 1.5rem;
+        width: 10rem;
+        label {
+          top: 0;
+          left: 0;
+        }
+        input {
+          position: absolute;
+          left: 7rem;
+          top: 0.25rem;
+        }
+      }
+    }
+    .action-buttons {
+      float: right;
     }
   }
 }

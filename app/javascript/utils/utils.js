@@ -1,10 +1,10 @@
 export const blankQuestion = { number: 1, text: "",
     answers: [
-        { letter: 'a', text: "", correct: false },
-        { letter: 'b', text: "", correct: false },
-        { letter: 'c', text: "", correct: false },
-        { letter: 'd', text: "", correct: false },
-        { letter: 'e', text: "", correct: false },
+        { letter: 'a', text: "", correct_answer: false },
+        { letter: 'b', text: "", correct_answer: false },
+        { letter: 'c', text: "", correct_answer: false },
+        { letter: 'd', text: "", correct_answer: false },
+        { letter: 'e', text: "", correct_answer: false },
     ]
 };
 
