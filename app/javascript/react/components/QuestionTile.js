@@ -45,6 +45,7 @@ export default function QuestionTile (props) {
     displayText = displayText.replace('best', '<b>best</b>');
     displayText = displayText.replace('true', '<b>true</b>');
     displayText = displayText.replace('NOT', '<b>NOT</b>');
+    displayText = displayText.replace('<br/>', '<br/>');
 
     return (
         <div key={question.id} className="question">
