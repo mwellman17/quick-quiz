@@ -1,5 +1,5 @@
 class Api::V1::QuizzesController < ApplicationController
-    before_action :authenticate_user!, except: [:show, :update, :create]
+    before_action :authenticate_user!, except: [:show]
     protect_from_forgery unless: -> { request.format.json? }
     serialization_scope :current_user
 

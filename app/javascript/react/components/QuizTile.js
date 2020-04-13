@@ -10,7 +10,7 @@ export default function QuizTile (props) {
         if (document.queryCommandSupported('copy')) {
             const copyToClipboard = () => {
                 const textField = document.createElement('textarea');
-                textField.innerText = `http://quick-quizzer.herokuapp.com/${fullPath}`;
+                textField.innerText = `http://quick-quizzer.herokuapp.com${fullPath}`;
                 document.body.appendChild(textField);
                 textField.select();
                 document.execCommand('copy');
