@@ -41,15 +41,9 @@ export default function QuestionTile (props) {
         if (points != null) return <div className="score">{`+${points}`}</div>
     };
 
-    let displayText = question.text.replace('most likely', '<b>most likely</b>');
-    displayText = displayText.replace('best', '<b>best</b>');
-    displayText = displayText.replace('true', '<b>true</b>');
-    displayText = displayText.replace('NOT', '<b>NOT</b>');
-    displayText = displayText.replace('<br/>', '<br/>');
-
     return (
         <div key={question.id} className="question">
-            <h5>{question.number + ") "}<span dangerouslySetInnerHTML={{ __html: displayText }} /></h5>
+            <h5>{question.number + ") "}<span dangerouslySetInnerHTML={{ __html: question.text }} /></h5>
             {renderImage()}
             {renderPoints()}
             <div className="answers">

@@ -13,7 +13,7 @@ export default function AnswerTile (props) {
 
     return (
         <p className={`answer ${selectedClasses}`} onClick={clicked ? null : handleClick}>
-            {answer["letter"] + ") " + answer.text}
+            {answer["letter"] + ") "}<span dangerouslySetInnerHTML={{ __html: answer.text }} />
         </p>
     )
 }

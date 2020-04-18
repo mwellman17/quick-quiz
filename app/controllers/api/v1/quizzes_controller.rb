@@ -4,7 +4,11 @@ class Api::V1::QuizzesController < ApplicationController
     serialization_scope :current_user
 
     def index
-        quizzes = current_user.quizzes.order(name: :asc)
+        if current_user.admin
+            quizzes = Quiz.all
+        else
+            quizzes = current_user.quizzes.order(name: :asc)
+        end
         render json: {
             user: current_user.id,
             quizzes: quizzes
