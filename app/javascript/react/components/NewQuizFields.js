@@ -1,4 +1,5 @@
 import React from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 import _ from 'lodash';
 import { blankQuestion, letters } from "../../utils/utils";
 
@@ -11,10 +12,10 @@ export default function NewQuizFields (props) {
         setData(newData)
     };
 
-    const handleQuestionChange = (event) => {
+    const handleQuestionChange = (path) => (body) => {
         let newData = _.cloneDeep(data);
-        let t = event.target.id.split('-');
-        newData[t[0]][t[1]][t[2]] = event.target.value;
+        let t = path.split('-');
+        newData[t[0]][t[1]][t[2]] = body;
         setData(newData)
     };
 
@@ -93,14 +94,32 @@ export default function NewQuizFields (props) {
                 <div key={qInd} className="question-fields">
                     <i className="fas fa-minus-circle" onClick={() => removeQuestion(qInd)}/>
                     <label htmlFor={questionTextPath}>{`Question ${question.number}:`}</label>
-                    <textarea name={questionTextPath} id={questionTextPath} rows="5"
-                              value={question.text} onChange={handleQuestionChange}/>
+                    <Editor
+                        id={questionTextPath}
+                        initialValue={question.text}
+                        apiKey="o2ftnbkoz7b7xluarbze8d7el732rp5gkbznylp1w37fxp17"
+                        init={{
+                            selector: `textarea#${questionTextPath}`,
+                            browser_spellcheck: true,
+                            menubar: false,
+                            plugins: [
+                                " advcode advlist anchor help",
+                                " lists link media powerpaste preview",
+                                " table wordcount"
+                            ],
+                            toolbar: 'undo redo | ' +
+                                'bold italic underline forecolor backcolor | alignleft aligncenter ' +
+                                'alignright alignjustify | bullist numlist outdent indent | ' +
+                                'superscript subscript table'
+                        }}
+                        onEditorChange={handleQuestionChange(questionTextPath)}
+                    />
                     <label htmlFor={questionImgPath}>Image URL</label>
                     <input type="text" name={questionImgPath} id={questionImgPath}
                            value={question["image_url"] ? question["image_url"] : ""}
                            onChange={handleQuestionChange} placeholder="optional"/>
                     {answers}
-                    <button onClick={() => addAnswer(qInd)}>add answer</button>
+                    <button className="button" onClick={() => addAnswer(qInd)}>add answer</button>
                 </div>
             )
         })
@@ -111,7 +130,7 @@ export default function NewQuizFields (props) {
             <label htmlFor="quiz-name">Quiz Name</label>
             <input type="text" id="quiz-name" name="quiz-name" value={data.quiz.name} onChange={handleQuizChange}/>
             {renderQuestions()}
-            <button onClick={addQuestion}>add question</button>
+            <button className="button" onClick={addQuestion}>add question</button>
         </div>
     )
 }

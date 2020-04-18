@@ -87,8 +87,8 @@ export default function NewQuizForm (props) {
             <h3>{editPath ? 'Edit Quiz' : 'Create a New Quiz'}</h3>
             {renderForm()}
             <div className="action-buttons">
-                <button onClick={onClose}>Cancel</button>
-                <button onClick={handleSave}>Save</button>
+                <button className="button" onClick={onClose}>Cancel</button>
+                <button className="button" onClick={handleSave}>Save</button>
             </div>
         </div>
     )

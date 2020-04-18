@@ -30,7 +30,7 @@ export default function QuestionTile (props) {
     let renderImage = () => {
         if (question['image_url']) {
             return (
-                <a href="http://quick-quizzer.herokuapp.com/PA_CXR.jpg" target="_blank" rel="noopener noreferrer">
+                <a href={question['image_url']} target="_blank" rel="noopener noreferrer">
                     <img src={question['image_url']} alt=""/>
                 </a>
             )

@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import QuestionTile from "./QuestionTile";
 
 export default function QuizContainer (props) {
-    const [quiz, setQuiz] = useState(null);
-    const [questions, setQuestions] = useState(null);
+    const [quiz, setQuiz] = useState({});
+    const [questions, setQuestions] = useState([]);
     const [totalPoints, setTotalPoints] = useState(0);
     const [error, setError] = useState(null);
     const params = useParams();
@@ -37,7 +37,10 @@ export default function QuizContainer (props) {
     };
 
     const renderScore = (position) => {
-        if (totalPoints !== 0) return <div className={`total-score ${position}`}>{`Total Score: ${totalPoints}`}</div>
+        const maxPoints = questions.length * 10;
+        if (totalPoints !== 0) {
+            return <div className={`total-score ${position}`}>{`Total Score: ${totalPoints}/${maxPoints}`}</div>
+        }
     };
 
     const renderQuiz = () => {
