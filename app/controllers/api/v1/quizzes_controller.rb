@@ -22,7 +22,7 @@ class Api::V1::QuizzesController < ApplicationController
         if Quiz.exists?(id)
             quiz = Quiz.find(id)
             if quiz.name.gsub(/(\s+|\/+)/, '') == name
-                questions = quiz.questions
+                questions = quiz.questions.order(number: :asc)
                 render json: {
                     quiz: quiz,
                     questions: ActiveModel::Serializer::CollectionSerializer.new(questions, serializer: QuestionSerializer)
