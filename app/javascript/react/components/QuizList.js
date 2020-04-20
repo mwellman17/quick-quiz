@@ -15,7 +15,7 @@ export default function QuizList (props) {
 
     return(
         <div id="quiz-list">
-            <button className="button" onClick={handleCreate} className="create-button">Create</button>
+            <button onClick={handleCreate} className="create-button button">Create</button>
             <h3>Dashboard</h3>
             {renderQuizzes()}
         </div>

@@ -21,7 +21,7 @@ class Api::V1::QuizzesController < ApplicationController
         name = array[1]
         if Quiz.exists?(id)
             quiz = Quiz.find(id)
-            if quiz.name.gsub(/(\s+|\/+)/, '') == name
+            if quiz.name.scan(/[\w]/).join() == name
                 questions = quiz.questions.order(number: :asc)
                 render json: {
                     quiz: quiz,

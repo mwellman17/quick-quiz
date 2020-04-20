@@ -97,20 +97,13 @@ export default function NewQuizFields (props) {
                     <Editor
                         id={questionTextPath}
                         initialValue={question.text}
-                        apiKey="o2ftnbkoz7b7xluarbze8d7el732rp5gkbznylp1w37fxp17"
                         init={{
                             selector: `textarea#${questionTextPath}`,
                             browser_spellcheck: true,
                             menubar: false,
-                            plugins: [
-                                " advcode advlist anchor help",
-                                " lists link media powerpaste preview",
-                                " table wordcount"
-                            ],
-                            toolbar: 'undo redo | ' +
-                                'bold italic underline forecolor backcolor | alignleft aligncenter ' +
-                                'alignright alignjustify | bullist numlist outdent indent | ' +
-                                'superscript subscript table'
+                            plugins: ["advlist lists wordcount table help"],
+                            toolbar: 'undo redo | bold italic underline forecolor backcolor | alignleft aligncenter ' +
+                                'alignright alignjustify | bullist numlist outdent indent | superscript subscript table'
                         }}
                         onEditorChange={handleQuestionChange(questionTextPath)}
                     />

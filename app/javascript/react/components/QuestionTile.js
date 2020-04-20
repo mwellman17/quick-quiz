@@ -43,7 +43,8 @@ export default function QuestionTile (props) {
 
     return (
         <div key={question.id} className="question">
-            <h5>{question.number + ") "}<span dangerouslySetInnerHTML={{ __html: question.text }} /></h5>
+            <p className="question-number">{question.number + ")"}</p>
+            <span className="question-text" dangerouslySetInnerHTML={{ __html: question.text }} />
             {renderImage()}
             {renderPoints()}
             <div className="answers">

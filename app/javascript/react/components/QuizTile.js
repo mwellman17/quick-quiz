@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function QuizTile (props) {
     const [copied, setCopied] = useState(false);
     const { quiz, handleEdit } = props;
-    const pathName = quiz.id + '=:' + quiz.name.replace(/(\s+|\/+)/g, '');
+    const pathName = quiz.id + '=:' + quiz.name.match(/[\w]/g).join('');
     const fullPath = `/quizzes/${pathName}`;
 
     const renderCopyLink = () => {

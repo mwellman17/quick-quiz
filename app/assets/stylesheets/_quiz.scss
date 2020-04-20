@@ -24,10 +24,14 @@
     height: auto;
     width: 80%;
     margin: 2rem auto 0 auto;
-    h5 {
-      width: 100%;
-      .standout {
-        font-weight: bold;
+    font-size: 14pt;
+    .question-number {
+      position: absolute;
+    }
+    .question-text {
+      p {
+        width: 100%;
+        padding-left: 30px;
       }
     }
     img {
@@ -52,6 +56,7 @@
   }
   .answers {
     padding-left: 5%;
+    font-size: 12pt;
     .answer{
       cursor: pointer;
       border: 1px solid black;
@@ -73,6 +78,12 @@
           padding-left: 1rem;
         }
       }
+      .answer-letter {
+        position: absolute;
+      }
+      .answer-text {
+        padding-left: 20px;
+      }
     }
   }
 }
@@ -88,7 +99,7 @@
     }
     .answers {
       .answer {
-        width: 75%;
+        width: 95%;
       }
     }
   }
