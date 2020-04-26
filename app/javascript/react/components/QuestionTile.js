@@ -2,22 +2,24 @@ import React, { useState } from 'react'
 import AnswerTile from "./AnswerTile";
 
 export default function QuestionTile (props) {
-    const [guesses, setGuesses] = useState(0);
+    const [guesses, setGuesses] = useState([]);
     const [points, setPoints] = useState(null);
     const { question, feedPoints } = props;
 
-    const handleClick = (isCorrect) => {
-        let newGuessCount = guesses + 1;
-        if (isCorrect) {
+    const handleClick = (answer) => {
+        let newGuesses = [...guesses];
+        newGuesses.push(answer.letter);
+
+        if (answer['correct_answer']) {
             let totalPoints;
-            if (newGuessCount === 1) totalPoints = 10;
-            else if (newGuessCount === 2) totalPoints = 5;
-            else if (newGuessCount === 3) totalPoints = 3;
+            if (newGuesses.length === 1) totalPoints = 10;
+            else if (newGuesses.length === 2) totalPoints = 5;
+            else if (newGuesses.length === 3) totalPoints = 3;
             else totalPoints = 0;
-            feedPoints(totalPoints);
+            feedPoints(totalPoints, { [question.number]: newGuesses });
             setPoints(totalPoints)
         }
-        else setGuesses(newGuessCount)
+        setGuesses(newGuesses);
     };
 
 

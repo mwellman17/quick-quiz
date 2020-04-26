@@ -3,9 +3,12 @@ import { useParams } from 'react-router-dom';
 import QuestionTile from "./QuestionTile";
 
 export default function QuizContainer (props) {
+    const [loaded, setLoaded] = useState(false);
     const [quiz, setQuiz] = useState({});
+    const [user, setUser] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [totalPoints, setTotalPoints] = useState(0);
+    const [picks, setPicks] = useState({});
     const [error, setError] = useState(null);
     const params = useParams();
 
@@ -26,26 +29,66 @@ export default function QuizContainer (props) {
             .then(body => {
                 setError(body.error);
                 setQuiz(body["quiz"]);
+                setUser(body["user"]);
                 setQuestions(body["questions"]);
+                setLoaded(true);
             })
             .catch(error => setError(`Error in fetch: ${error.message}`))
     }, []);
 
-    const handlePoints = (points) => {
+    useEffect(() => {
+        if (loaded && Object.keys(picks).length === questions.length) {
+            submitResults()
+        }
+    }, [picks]);
+
+    const handlePoints = (points, guesses) => {
         let newTotal = totalPoints + points;
-        setTotalPoints(newTotal)
+        const newPicks = Object.assign({}, picks, guesses);
+        setPicks(newPicks);
+        setTotalPoints(newTotal);
+    };
+
+    const submitResults = () => {
+        const payload = {
+            totalPoints,
+            picks,
+            user,
+            quizId: quiz.id
+        };
+        fetch(`/api/v1/results`, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    let errorMessage = `${response.status} (${response.statusText})`,
+                        error = new Error(errorMessage);
+                    throw(error);
+                }
+            })
+            .then(response => response.json())
+            .then(body => {
+                if (body.success) console.log(body.success);
+                if (body.error) console.log(body.error)
+            })
+            .catch(error => {
+                console.error(`Error in fetch: ${error.message}`)
+            });
     };
 
     const renderScore = (position) => {
         const maxPoints = questions.length * 10;
-        if (totalPoints !== 0) {
-            return <div className={`total-score ${position}`}>{`Total Score: ${totalPoints}/${maxPoints}`}</div>
-        }
+        return <div className={`total-score ${position}`}>{`Total Score: ${totalPoints}/${maxPoints}`}</div>
     };
 
     const renderQuiz = () => {
         if (error) return <p>{error}</p>;
-        else if (!quiz || !questions) return <p>Loading...</p>;
+        else if (!loaded) return <p>Loading...</p>;
         else {
             let count = 0;
             let renderQuestions = questions.map(question => {
@@ -62,6 +105,7 @@ export default function QuizContainer (props) {
             )
         }
     };
+
     return(
         <div id="main-content">
             {renderQuiz()}

@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
     has_many :quizzes, :dependent => :delete_all
+    has_many :results
 end

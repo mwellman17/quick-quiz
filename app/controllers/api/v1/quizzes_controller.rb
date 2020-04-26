@@ -23,9 +23,11 @@ class Api::V1::QuizzesController < ApplicationController
             quiz = Quiz.find(id)
             if quiz.name.scan(/[\w]/).join() == name
                 questions = quiz.questions.order(number: :asc)
+                user_id = current_user ? current_user.id : nil
                 render json: {
                     quiz: quiz,
-                    questions: ActiveModel::Serializer::CollectionSerializer.new(questions, serializer: QuestionSerializer)
+                    questions: ActiveModel::Serializer::CollectionSerializer.new(questions, serializer: QuestionSerializer),
+                    user: user_id
                 }
             else
                 render json: { error: "Not found."}

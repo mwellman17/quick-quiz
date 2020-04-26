@@ -5,16 +5,16 @@ export default function AnswerTile (props) {
     const { answer, clickHandler } = props;
 
     const handleClick = () => {
-        clickHandler(answer['correct_answer']);
+        clickHandler(answer);
         setClicked(true)
     };
 
     let selectedClasses = clicked ? answer['correct_answer'] ? "correct" : "incorrect" : "";
 
     return (
-        <p className={`answer ${selectedClasses}`} onClick={clicked ? null : handleClick}>
+        <div className={`answer ${selectedClasses}`} onClick={clicked ? null : handleClick}>
             <span className="answer-letter">{answer["letter"] + ")"}</span>
             <div className="answer-text" dangerouslySetInnerHTML={{ __html: answer.text }} />
-        </p>
+        </div>
     )
 }
